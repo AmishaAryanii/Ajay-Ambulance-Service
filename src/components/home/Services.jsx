@@ -1,131 +1,3 @@
-// "use client";
-
-// import Image from "next/image";
-// import { motion } from "framer-motion";
-// import {
-//   HeartPulse,
-//   Truck,
-//   Building2,
-//   Users,
-//   Cross,
-//   CalendarClock,
-// } from "lucide-react";
-
-// // 👉 ADD YOUR IMAGE LINKS HERE. Put each photo in /public (e.g. /public/services/icu.jpg)
-// // and set `image: "/services/icu.jpg"`. Leave `image: null` to keep the icon-only card.
-// const services = [
-//   {
-//     icon: HeartPulse,
-//     title: "ICU Life Support Ambulance",
-//     desc: "Fully equipped ICU ambulances with ventilator, cardiac monitor, oxygen support, infusion pumps, and trained paramedics for critical patients.",
-//     image: null,
-//   },
-//   {
-//     icon: Truck,
-//     title: "Normal Ambulance",
-//     desc: "Safe and comfortable ambulance service for routine hospital visits, patient discharge, dialysis, and non-emergency transportation.",
-//     image: null,
-//   },
-//   {
-//     icon: Building2,
-//     title: "Outstation Ambulance",
-//     desc: "24×7 long-distance ambulance service available across Delhi NCR and all major cities in India with experienced medical staff.",
-//     image: null,
-//   },
-//   {
-//     icon: Users,
-//     title: "Patient Transfer Service",
-//     desc: "Professional inter-hospital transfers with continuous monitoring and medical assistance throughout the journey.",
-//     image: null,
-//   },
-//   {
-//     icon: Cross,
-//     title: "Dead Body Mortuary Van",
-//     desc: "Respectful and dignified mortuary van services for local and outstation transportation.",
-//     image: null,
-//   },
-//   {
-//     icon: CalendarClock,
-//     title: "Event Medical Support",
-//     desc: "Ambulance and paramedic standby services for weddings, sports events, corporate gatherings, and public functions.",
-//     image: null,
-//   },
-// ];
-
-// export default function Services() {
-//   return (
-//     <section className="bg-gray-50 py-16 md:py-24">
-//       <div className="max-w-7xl mx-auto px-4 md:px-8">
-//         <motion.div
-//           initial={{ opacity: 0, y: 20 }}
-//           whileInView={{ opacity: 1, y: 0 }}
-//           viewport={{ once: true }}
-//           transition={{ duration: 0.5 }}
-//           className="text-center max-w-2xl mx-auto mb-14"
-//         >
-//           <span className="font-heading font-semibold text-xs md:text-sm text-[#b61416] tracking-[0.15em] uppercase">
-//             Our Services
-//           </span>
-//           <h2 className="font-heading font-extrabold text-[#01203f] text-3xl md:text-4xl mt-3">
-//             All Types of Ambulance Services Available 24×7
-//           </h2>
-//           <p className="font-body text-gray-600 mt-4">
-//             ICU Life Support Ambulance, Normal Ambulance, Outstation Ambulance,
-//             Patient Transfer, Mortuary Van, and Event Ambulance Services
-//             available 24 hours a day across Delhi NCR.
-//           </p>
-//         </motion.div>
-
-//         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
-//           {services.map(({ icon: Icon, title, desc, image }, i) => (
-//             <motion.div
-//               key={title}
-//               initial={{ opacity: 0, y: 24 }}
-//               whileInView={{ opacity: 1, y: 0 }}
-//               viewport={{ once: true }}
-//               transition={{ duration: 0.5, delay: i * 0.08 }}
-//               className="group bg-white rounded-2xl overflow-hidden border-l-4 border-r-4 border-y border-[#b61416]/60 md:border-gray-100 md:hover:border-[#b61416]/70 shadow-sm hover:shadow-xl transition-all duration-300"
-//             >
-//               {/* Image / icon banner */}
-//               <div className="relative aspect-[16/10] bg-[#01203f] overflow-hidden">
-//                 {image && (
-//                   <Image
-//                     src={image}
-//                     alt={title}
-//                     fill
-//                     sizes="(max-width: 768px) 100vw, 400px"
-//                     className="object-cover opacity-90 group-hover:scale-105 transition-transform duration-500"
-//                   />
-//                 )}
-//                 {!image && (
-//                   <div className="absolute inset-0 flex items-center justify-center">
-//                     <Icon size={44} className="text-white/20" strokeWidth={1.2} />
-//                   </div>
-//                 )}
-//                 <div className="absolute inset-0 bg-gradient-to-t from-[#01203f]/70 via-transparent to-transparent" />
-
-//                 {/* Icon badge overlapping the image */}
-//                 <div className="absolute -bottom-6 left-6 flex items-center justify-center w-14 h-14 rounded-xl bg-[#b61416] shadow-lg group-hover:scale-105 transition-transform duration-300">
-//                   <Icon size={24} className="text-white" strokeWidth={1.8} />
-//                 </div>
-//               </div>
-
-//               <div className="p-6 pt-9">
-//                 <h3 className="font-heading font-bold text-[#01203f] text-lg">
-//                   {title}
-//                 </h3>
-//                 <p className="font-body text-gray-600 text-sm mt-2.5 leading-relaxed">
-//                   {desc}
-//                 </p>
-//               </div>
-//             </motion.div>
-//           ))}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-
 "use client";
 
 import Image from "next/image";
@@ -137,124 +9,124 @@ import {
   Users,
   Cross,
   CalendarClock,
+  Phone,
+  ArrowUpRight,
 } from "lucide-react";
 
-// 👉 ADD YOUR IMAGE LINKS HERE. Put each photo in /public (e.g. /public/services/icu.jpg)
-// and set `image: "/services/icu.jpg"`. Leave `image: null` to keep the icon-only card.
+const PHONE = "+9192891994279";
+
+// Images /public folder mein rakho. image: null karoge to grey box dikhega.
 const services = [
   {
     icon: HeartPulse,
     title: "ICU Life Support Ambulance",
-    desc: "Fully equipped ICU ambulances with ventilator, cardiac monitor, oxygen support, infusion pumps, and trained paramedics for critical patients.",
-    image: "/urgentcare6.jpeg",
+    desc: "Fully equipped ICU ambulances with ventilator, cardiac monitor, oxygen support, infusion pumps and trained paramedics for critical patients.",
+    image: "/img2.png",
   },
   {
     icon: Truck,
     title: "Normal Ambulance",
-    desc: "Safe and comfortable ambulance service for routine hospital visits, patient discharge, dialysis, and non-emergency transportation.",
-    image: "/urgentcare10.jpeg",
+    desc: "Safe and comfortable ambulance service for routine hospital visits, patient discharge, dialysis and non-emergency transportation.",
+    image: "/urgentcare5.png",
   },
   {
     icon: Building2,
     title: "Outstation Ambulance",
-    desc: "24×7 long-distance ambulance service available across Delhi NCR and all major cities in India with experienced medical staff.",
-    image: "/urgentcare7.jpeg",
+    desc: "24×7 long-distance ambulance service across Delhi NCR and major cities in India with experienced medical staff.",
+    image: "/urgentcare4.png",
   },
   {
     icon: Users,
     title: "Patient Transfer Service",
     desc: "Professional inter-hospital transfers with continuous monitoring and medical assistance throughout the journey.",
-    image: "/urgentcare1.jpeg",
+    image: "/urgentcare1.png",
   },
   {
     icon: Cross,
-    title: "Dead Body Mortuary Van",
+    title: "Mortuary Van Service",
     desc: "Respectful and dignified mortuary van services for local and outstation transportation.",
-    image: "/urgentcare8.jpeg",
+    image: "/img1.png",
   },
   {
     icon: CalendarClock,
     title: "Event Medical Support",
-    desc: "Ambulance and paramedic standby services for weddings, sports events, corporate gatherings, and public functions.",
-    image: "/urgentcare11.jpeg",
+    desc: "Ambulance and paramedic standby for weddings, sports events, corporate gatherings and public functions.",
+    image: "/urgentcare2.png",
   },
 ];
 
 export default function Services() {
   return (
     <section className="bg-gray-50 py-16 md:py-24">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <div className="mx-auto max-w-7xl px-4 md:px-8">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center max-w-2xl mx-auto mb-14"
+          className="mx-auto mb-14 max-w-3xl text-center"
         >
-          <span className="font-heading font-semibold text-xs md:text-sm text-[#b61416] tracking-[0.15em] uppercase">
+          <span className="font-heading text-xs font-semibold uppercase tracking-[0.15em] text-[#b61416] md:text-sm">
             Our Services
           </span>
-          <h2 className="font-heading font-extrabold text-[#01203f] text-3xl md:text-4xl mt-3">
-            All Types of Ambulance Services Available 24×7
+          <h2 className="mt-3 font-heading text-3xl font-extrabold text-[#01203f] md:text-4xl lg:text-5xl">
+            All Types of Ambulance Services{" "}
+            <span className="text-[#b61416]">Available 24×7</span>
           </h2>
-          <p className="font-body text-gray-600 mt-4">
-            ICU Life Support Ambulance, Normal Ambulance, Outstation Ambulance,
-            Patient Transfer, Mortuary Van, and Event Ambulance Services
-            available 24 hours a day across Delhi NCR.
+          <p className="mt-4 font-body text-gray-600">
+            ICU Life Support, Normal, Outstation, Patient Transfer, Mortuary
+            Van and Event Ambulance services, available 24 hours a day.
           </p>
         </motion.div>
 
-        {/* Outer bordered container wrapping all cards */}
-        <div className="rounded-[2rem] md:rounded-[2.5rem] border-2 border-[#01203f] p-3 sm:p-5 md:p-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
-            {services.map(({ icon: Icon, title, desc, image }, i) => (
-              <motion.div
-                key={title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="group bg-white rounded-2xl overflow-hidden border-l-3 border-r-3 border-y border-[#01203f]/90 md:border-gray-100 md:hover:border-[#01203f]/90 shadow-sm hover:shadow-xl transition-all duration-300"
-              >
-                {/* Image / icon banner */}
-                <div className="relative aspect-[16/10] bg-[#01203f] overflow-hidden">
-                  {image && (
-                    <Image
-                      src={image}
-                      alt={title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 400px"
-                      className="object-cover opacity-90 group-hover:scale-105 transition-transform duration-500"
-                    />
-                  )}
-                  {!image && (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <Icon
-                        size={44}
-                        className="text-white/20"
-                        strokeWidth={1.2}
-                      />
-                    </div>
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#01203f]/70 via-transparent to-transparent" />
-
-                  {/* Icon badge overlapping the image */}
-                  <div className="absolute -bottom-4 left-6 flex items-center justify-center w-14 h-14 rounded-xl bg-[#b61416] shadow-lg group-hover:scale-105 transition-transform duration-300">
-                    <Icon size={24} className="text-white" strokeWidth={1.8} />
-                  </div>
+        {/* 3 cards on top, 3 cards below */}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map(({ icon: Icon, title, desc, image }, i) => (
+            <motion.div
+              key={title}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: (i % 3) * 0.08 }}
+              className="group flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#b61416]/40 hover:shadow-xl"
+            >
+              <div className="relative aspect-[16/10] overflow-hidden bg-gray-200">
+                {image && (
+                  <Image
+                    src={image}
+                    alt={title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 400px"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                )}
+                <div className="absolute bottom-0 left-5 translate-y-1/2">
+                
                 </div>
+              </div>
 
-                <div className="p-6 pt-9">
-                  <h3 className="font-heading font-bold text-[#01203f] text-lg">
-                    {title}
-                  </h3>
-                  <p className="font-body text-gray-600 text-sm mt-2.5 leading-relaxed">
-                    {desc}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+              <div className="flex flex-1 flex-col p-6 pt-9">
+                <h3 className="font-heading text-lg font-bold text-[#01203f]">
+                  {title}
+                </h3>
+                <p className="mt-2 flex-1 font-body text-sm leading-relaxed text-gray-600">
+                  {desc}
+                </p>
+                <a
+                  href={`tel:${PHONE}`}
+                  className="mt-5 inline-flex items-center gap-1.5 font-heading text-sm font-semibold text-[#b61416] transition-colors hover:text-[#8f0f11]"
+                >
+                  <Phone size={15} />
+                  Book Now
+                  <ArrowUpRight
+                    size={16}
+                    className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
+                </a>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

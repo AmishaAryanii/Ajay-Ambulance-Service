@@ -13,8 +13,9 @@ export default function ContactPage() {
   return (
     <>
       <ContactHero />
+       <ContactInfo />
       <ContactForm />
-      <ContactInfo />
+     
       
 
       {/* <FAQ /> */}

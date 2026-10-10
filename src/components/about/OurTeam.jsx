@@ -7,10 +7,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const team = [
-  { initials: "SK", name: "Saurabh Kumar", role: "Founder & CEO" },
-  { initials: "AR", name: "Dr. Anjali Rawat", role: "Chief Medical Officer" },
-  { initials: "VS", name: "Vikram Singh", role: "Head of Operations" },
-  { initials: "RM", name: "Rahul Mehta", role: "Fleet & Logistics Manager" },
+  { initials: "AK", name: "Ajay Kumar", role: "Founder & CEO" },
+  { initials: "AR", name: "Dr. Arti Rawat", role: "Chief Medical Officer" },
+  { initials: "VS", name: "Vipin Singh", role: "Head of Operations" },
+  { initials: "RM", name: "Raju Mehta", role: "Fleet & Logistics Manager" },
 ];
 
 export default function OurTeam() {

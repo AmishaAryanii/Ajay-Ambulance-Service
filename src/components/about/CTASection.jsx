@@ -4,33 +4,56 @@ import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import { Phone, Ambulance, ArrowRight } from "lucide-react";
+import { Phone, Mail, Ambulance, ArrowRight, Clock } from "lucide-react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// Replace with your own asset in /public, e.g. "/images/emergency-cta.jpg"
-const BG_IMAGE =
-  "/urgentcare1.jpeg";
+// Replace with your own asset in /public
+const BG_IMAGE = "/urgentcare1.jpeg";
 
-const PHONE = "+919996453141";
+const PHONE = "+9192891994279";
+const PHONE_DISPLAY = "+91 92891994279";
+const EMAIL = "ay5451959@gmail.com";
 
-const stats = [
-  { value: "24/7", label: "Emergency Support" },
-  { value: "10+", label: "Years Experience" },
-  { value: "120+", label: "Ambulances" },
-  { value: "5,000+", label: "Patients Served" },
+const highlights = [
+  "Available 24/7, every day of the year",
+  "ICU, ventilator & basic life support ambulances",
+  "Trained paramedics on every ride",
+  "Transparent pricing, no hidden charges",
 ];
 
-export default function EmergencyCTA() {
+export default function CTASection() {
   const sectionRef = useRef(null);
-  const iconRef = useRef(null);
-  const headingRef = useRef(null);
-  const paraRef = useRef(null);
-  const statsRef = useRef(null);
-  const buttonsRef = useRef(null);
-  const numberRef = useRef(null);
+  const leftRef = useRef(null);
+  const cardRef = useRef(null);
+
+  const trackCallConversion = (phone) => (e) => {
+    e.preventDefault();
+
+    let called = false;
+
+    const makeCall = () => {
+      if (called) return;
+      called = true;
+      window.location.href = `tel:${phone}`;
+    };
+
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      const timeout = setTimeout(makeCall, 1000);
+
+      window.gtag("event", "conversion", {
+        send_to: "AW-18310636441/-XVHCOC9mdQcEJnHmJtE",
+        event_callback: () => {
+          clearTimeout(timeout);
+          makeCall();
+        },
+      });
+    } else {
+      makeCall();
+    }
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -43,46 +66,15 @@ export default function EmergencyCTA() {
       });
 
       tl.fromTo(
-        iconRef.current,
-        { scale: 0.4, opacity: 0, rotate: -20 },
-        {
-          scale: 1,
-          opacity: 1,
-          rotate: 0,
-          duration: 0.6,
-          ease: "back.out(1.7)",
-        },
-      )
-        .fromTo(
-          headingRef.current,
-          { y: 30, opacity: 0 },
-          { y: 0, opacity: 1 },
-          "-=0.3",
-        )
-        .fromTo(
-          paraRef.current,
-          { y: 24, opacity: 0 },
-          { y: 0, opacity: 1 },
-          "-=0.4",
-        )
-        .fromTo(
-          statsRef.current.children,
-          { y: 24, opacity: 0 },
-          { y: 0, opacity: 1, stagger: 0.1 },
-          "-=0.35",
-        )
-        .fromTo(
-          buttonsRef.current.children,
-          { y: 20, opacity: 0, scale: 0.95 },
-          { y: 0, opacity: 1, scale: 1, stagger: 0.1 },
-          "-=0.3",
-        )
-        .fromTo(
-          numberRef.current,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.5 },
-          "-=0.2",
-        );
+        leftRef.current.children,
+        { x: -30, opacity: 0 },
+        { x: 0, opacity: 1, stagger: 0.1 },
+      ).fromTo(
+        cardRef.current,
+        { x: 40, opacity: 0, scale: 0.96 },
+        { x: 0, opacity: 1, scale: 1 },
+        "-=0.6",
+      );
     }, sectionRef);
 
     return () => ctx.revert();
@@ -91,20 +83,18 @@ export default function EmergencyCTA() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden py-10 md:py-14 text-[#f7f5f2]"
+      className="relative overflow-hidden py-16 md:py-24 text-[#f7f5f2]"
     >
       {/* Background image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${BG_IMAGE})` }}
       />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#01203f] via-[#01203f]/95 to-[#01203f]/80" />
 
-      {/* Brand gradient overlay for legibility */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#01203f]/95 via-[#01203f]/90 to-[#b61416]/80" />
-
-      {/* Ambient glow accents */}
-      <div className="absolute top-0 left-0 w-80 h-80 bg-[#b61416]/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-white/5 rounded-full blur-3xl" />
+      {/* Ambient glow */}
+      <div className="absolute -top-20 -left-20 w-96 h-96 bg-[#b61416]/20 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#b61416]/10 rounded-full blur-3xl" />
       <div
         className="absolute inset-0 opacity-[0.05]"
         style={{
@@ -114,98 +104,96 @@ export default function EmergencyCTA() {
         }}
       />
 
-      <div className="relative max-w-5xl mx-auto px-5 sm:px-8 text-center">
-        {/* Pulsing siren icon */}
-        <div ref={iconRef} className="relative w-11 h-11 mx-auto mb-4">
-          <span className="absolute inset-0 rounded-full bg-[#b61416]/40 animate-ping [animation-duration:2s]" />
-          <div className="relative w-11 h-11 rounded-full bg-[#b61416] flex items-center justify-center shadow-lg shadow-[#b61416]/30">
-            <Ambulance className="w-5 h-5 text-white" />
-          </div>
+      <div className="relative max-w-7xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-12 items-center">
+        {/* LEFT: copy */}
+        <div ref={leftRef}>
+          <span className="inline-flex items-center gap-2 font-heading font-semibold text-xs tracking-[0.15em] uppercase bg-[#b61416] px-4 py-1.5 rounded-full shadow-lg shadow-[#b61416]/30">
+            <Ambulance size={14} />
+            Ajay Ambulance Service
+          </span>
+
+          <h2 className="font-heading font-extrabold text-3xl md:text-4xl lg:text-5xl mt-5 leading-tight">
+            Need an ambulance <span className="text-[#b61416]">right now?</span>
+          </h2>
+
+          <p className="mt-4 max-w-xl text-white/75 leading-relaxed">
+            Whether it is a medical emergency, a planned patient transfer or an
+            ICU ambulance, our team is one call away and ready to reach you as
+            fast as possible.
+          </p>
+
+          <ul className="mt-6 space-y-3">
+            {highlights.map((item) => (
+              <li key={item} className="flex items-center gap-3 text-sm md:text-base text-white/85">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#b61416]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-white" />
+                </span>
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <h2
-          ref={headingRef}
-          className="font-heading font-extrabold text-2xl md:text-3xl lg:text-4xl drop-shadow-sm"
-        >
-          Need emergency medical assistance?
-        </h2>
-
-        <p
-          ref={paraRef}
-          className="max-w-xl mx-auto mt-3 text-sm md:text-base text-white/75 leading-relaxed"
-        >
-          Our emergency response team is available 24 hours a day, 7 days a week
-          — medical emergency, patient transfer, or ICU ambulance, we&apos;re
-          just one call away.
-        </p>
-
-        {/* ECG divider */}
-        <div className="w-full max-w-[180px] mx-auto my-5 opacity-60">
-          <svg
-            viewBox="0 0 300 40"
-            className="w-full h-5"
-            preserveAspectRatio="none"
-          >
-            <polyline
-              points="0,20 70,20 85,4 100,36 115,20 300,20"
-              fill="none"
-              stroke="#f7f5f2"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
-
-        {/* Stat row */}
+        {/* RIGHT: contact card */}
         <div
-          ref={statsRef}
-          className="flex flex-wrap justify-center max-w-2xl mx-auto mb-6"
+          ref={cardRef}
+          className="relative rounded-3xl border border-white/15 bg-white/5 p-8 md:p-10 backdrop-blur-md shadow-2xl"
         >
-          {stats.map((s, i) => (
-            <div
-              key={s.label}
-              className={`flex-1 min-w-[110px] px-3 py-1 ${
-                i !== 0 ? "sm:border-l border-white/15" : ""
-              }`}
-            >
-              <h3 className="font-heading font-extrabold text-xl md:text-2xl">
-                {s.value}
-              </h3>
-              <p className="text-white/60 text-[11px] mt-0.5 tracking-wide uppercase">
-                {s.label}
-              </p>
-            </div>
-          ))}
-        </div>
+          <div className="absolute -top-5 right-8 flex h-12 w-12 items-center justify-center rounded-full bg-[#b61416] shadow-lg shadow-[#b61416]/40">
+            <span className="absolute inset-0 rounded-full bg-[#b61416]/40 animate-ping [animation-duration:2s]" />
+            <Clock className="relative h-5 w-5 text-white" />
+          </div>
 
-        <div ref={buttonsRef} className="flex flex-wrap justify-center gap-3">
-          <a
-            href={`tel:${PHONE}`}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#f7f5f2] text-[#b61416] font-heading font-semibold text-sm md:text-base rounded-full hover:bg-white transition-colors shadow-xl shadow-black/20 hover:-translate-y-0.5 duration-200"
-          >
-            <Phone className="w-4 h-4" />
-            Call Now
-          </a>
-
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 backdrop-blur-sm border border-white/25 hover:border-white/60 hover:bg-white/10 rounded-full font-heading font-medium text-sm md:text-base transition-colors"
-          >
-            Book Ambulance
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-
-        <div ref={numberRef} className="mt-4">
-          <p className="text-white/60 text-[11px] uppercase tracking-[0.15em]">
-            Emergency Helpline
+          <p className="text-white/60 text-xs uppercase tracking-[0.15em]">
+            24/7 Emergency Helpline
           </p>
           <a
             href={`tel:${PHONE}`}
-            className="font-heading font-bold text-lg md:text-xl mt-1 inline-block hover:text-white/80 transition-colors"
+            onClick={trackCallConversion(PHONE)}
+            className="mt-2 block font-heading font-extrabold text-3xl md:text-4xl hover:text-white/80 transition-colors"
           >
-            +91 8755696315
+            {PHONE_DISPLAY}
+          </a>
+
+          {/* ECG divider */}
+          <div className="w-full max-w-[180px] my-5 opacity-60">
+            <svg viewBox="0 0 300 40" className="w-full h-5" preserveAspectRatio="none">
+              <polyline
+                points="0,20 70,20 85,4 100,36 115,20 300,20"
+                fill="none"
+                stroke="#f7f5f2"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <a
+              href={`tel:${PHONE}`}
+              onClick={trackCallConversion(PHONE)}
+              className="inline-flex flex-1 items-center justify-center gap-2 px-6 py-3 bg-[#b61416] hover:bg-[#9a1012] text-white font-heading font-semibold rounded-full shadow-lg shadow-[#b61416]/30 transition-colors hover:-translate-y-0.5 duration-200"
+            >
+              <Phone className="w-4 h-4" />
+              Call Now
+            </a>
+
+            <Link
+              href="/contact"
+              className="inline-flex flex-1 items-center justify-center gap-2 px-6 py-3 bg-white/5 border border-white/25 hover:border-white/60 hover:bg-white/10 rounded-full font-heading font-medium transition-colors"
+            >
+              Book Ambulance
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          <a
+            href={`mailto:${EMAIL}`}
+            className="mt-5 inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
+          >
+            <Mail className="w-4 h-4" />
+            {EMAIL}
           </a>
         </div>
       </div>

@@ -1,8 +1,5 @@
-// app/layout.js
-// Add this font setup to your root layout — Plus Jakarta Sans for headings, Inter for body.
-// This gives the site a premium, medical/emergency-appropriate feel.
-
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import TopBar from "@/components/common/Topbar";
 import Navbar from "@/components/common/Navbar";
@@ -34,26 +31,36 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${jakarta.variable} ${inter.variable}`}>
       <body className="font-body antialiased">
+        {/* Google Ads Library */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18310636441"
+          strategy="afterInteractive"
+        />
+
+        {/* Google Ads Initialization */}
+        <Script id="google-ads" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag(){
+              dataLayer.push(arguments);
+            }
+
+            window.gtag = gtag;
+
+            gtag('js', new Date());
+
+            gtag('config', 'AW-18310636441');
+          `}
+        </Script>
+
         <TopBar />
         <Navbar />
         {children}
-        <Footer/>
-        <ScrollToTop/>
-        <CallButton/>
+        <Footer />
+        <ScrollToTop />
+        <CallButton />
       </body>
     </html>
   );
 }
-
-/* 
-  ADD THIS to tailwind.config.js under theme.extend:
-
-  fontFamily: {
-    heading: ["var(--font-heading)"],
-    body: ["var(--font-body)"],
-  },
-
-  Then use:
-  - className="font-heading" for headings/logo
-  - className="font-body" for paragraph text (already default on <body>)
-*/

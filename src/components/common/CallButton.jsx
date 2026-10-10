@@ -2,12 +2,41 @@
 
 import { Phone } from "lucide-react";
 
+const PHONE = "+9192891994279";
+
 export default function FloatingCallButton() {
+  const trackCallConversion = (e) => {
+    e.preventDefault();
+
+    let called = false;
+
+    const makeCall = () => {
+      if (called) return;
+      called = true;
+      window.location.href = `tel:${PHONE}`;
+    };
+
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      const timeout = setTimeout(makeCall, 1000);
+
+      window.gtag("event", "conversion", {
+        send_to: "AW-18310636441/-XVHCOC9mdQcEJnHmJtE",
+        event_callback: () => {
+          clearTimeout(timeout);
+          makeCall();
+        },
+      });
+    } else {
+      makeCall();
+    }
+  };
+
   return (
     <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-[999] group">
       <a
-        href="tel:+919996453141"
+        href={`tel:${PHONE}`}
         aria-label="Call Now"
+        onClick={trackCallConversion}
         className="flex items-center"
       >
         {/* Desktop Hover Label */}
@@ -20,16 +49,11 @@ export default function FloatingCallButton() {
 
         {/* Button */}
         <div className="relative">
-          {/* Pulse */}
           <span className="absolute inset-0 rounded-full bg-[#b61416] animate-ping opacity-30" />
 
-          {/* Outer Circle */}
-          {/* Outer Circle */}
           <div className="w-20 h-20 md:w-16 md:h-16 lg:w-18 lg:h-18 rounded-full flex items-center justify-center">
-            {/* Pulse */}
             <span className="absolute inset-0 rounded-full bg-[#b61416] animate-ping opacity-30" />
 
-            {/* Inner Circle */}
             <div className="w-20 h-20 md:w-16 md:h-16 lg:w-18 lg:h-18 rounded-full bg-[#b61416] flex items-center justify-center shadow-xl">
               <Phone className="w-8 h-8 md:w-7 md:h-7 text-white" />
             </div>

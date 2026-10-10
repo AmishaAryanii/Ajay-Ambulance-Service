@@ -1,77 +1,118 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Clock3 } from "lucide-react";
+import { Phone, Mail, MapPin, Clock3, ArrowUpRight } from "lucide-react";
+
+const PHONE = "+9192891994279";
+const PHONE_DISPLAY = "+91 92891994279";
+const EMAIL = "ay5451959@gmail.com";
+
+// Replace with your real address / map link
+const ADDRESS = "Sector 52,Noida India";
+const MAP_LINK = "https://maps.google.com/?q=Ajay+Ambulance+Service";
 
 const infoCards = [
   {
     icon: Phone,
     title: "Call Us",
-    lines: ["+91 9996453141", "+91 8755696315"],
-    href: "tel:+919996453141",
+    sub: "24/7 emergency helpline",
+    value: PHONE_DISPLAY,
+    href: `tel:${PHONE}`,
+    cta: "Call Now",
   },
   {
     icon: Mail,
     title: "Email Us",
-    lines: ["info@saurabhambulance.in", "support@saurabhambulance.in"],
-    href: "mailto:help@saurabhambulance.in",
+    sub: "We reply as soon as possible",
+    value: EMAIL,
+    href: `mailto:${EMAIL}`,
+    cta: "Send Email",
   },
   {
     icon: MapPin,
     title: "Visit Us",
-    lines: ["Sector-3,Dwarka, Near Akash Hospital,New Delhi"],
-   href:["https://maps.google.com/?q=Aakash+Healthcare+Super+Speciality+Hospital+Dwarka+Sector+3+New+Delhi"],
+    sub: "Our base location",
+    value: ADDRESS,
+    href: MAP_LINK,
+    cta: "Get Directions",
+    external: true,
   },
   {
     icon: Clock3,
     title: "Working Hours",
-    lines: ["Emergency: 24/7"],
+    sub: "Always available",
+    value: "Emergency: 24/7",
     href: null,
   },
 ];
 
 export default function ContactInfoCards() {
   return (
-    <section className="bg-white py-16 md:py-20">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {infoCards.map(({ icon: Icon, title, lines, href }, i) => {
-            const CardTag = href ? "a" : "div";
-            return (
-              <motion.div key={title}>
-                <CardTag
-                  {...(href ? { href } : {})}
-                  className="block h-full bg-gray-50 rounded-2xl p-7 border border-gray-100 hover:border-[#b61416]/30 hover:shadow-lg transition-all duration-300"
+    <section className="bg-gray-50 py-16 md:py-20">
+      <div className="mx-auto max-w-7xl px-4 md:px-8">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {infoCards.map(
+            ({ icon: Icon, title, sub, value, href, cta, external }, i) => {
+              const CardTag = href ? "a" : "div";
+              const linkProps = href
+                ? {
+                    href,
+                    ...(external
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {}),
+                  }
+                : {};
+
+              return (
+                <motion.div
+                  key={title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
                 >
-                  <motion.div
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: i * 0.08 }}
+                  <CardTag
+                    {...linkProps}
+                    className="group relative block h-full overflow-hidden rounded-2xl border border-gray-200 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-[#b61416]/40 hover:shadow-xl"
                   >
-                    <div className="flex items-center justify-center w-[52px] h-[52px] rounded-xl bg-[#01203f]">
+                    {/* Number watermark */}
+                    <span className="absolute right-5 top-4 font-heading text-4xl font-extrabold text-[#01203f]/5">
+                      0{i + 1}
+                    </span>
+
+                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#b61416]/10 transition-colors duration-300 group-hover:bg-[#b61416]">
                       <Icon
-                        size={22}
-                        className="text-white"
+                        size={24}
                         strokeWidth={1.8}
+                        className="text-[#b61416] transition-colors duration-300 group-hover:text-white"
                       />
                     </div>
-                    <h3 className="font-heading font-bold text-[#01203f] text-base mt-5">
+
+                    <h3 className="mt-5 font-heading text-lg font-bold text-[#01203f]">
                       {title}
                     </h3>
-                    {lines.map((line) => (
-                      <p
-                        key={line}
-                        className="font-body text-gray-600 text-sm mt-1"
-                      >
-                        {line}
-                      </p>
-                    ))}
-                  </motion.div>
-                </CardTag>
-              </motion.div>
-            );
-          })}
+                    <p className="mt-0.5 font-body text-xs uppercase tracking-wider text-gray-400">
+                      {sub}
+                    </p>
+
+                    <p className="mt-4 break-words font-body text-sm font-medium leading-relaxed text-gray-700">
+                      {value}
+                    </p>
+
+                    {cta && (
+                      <span className="mt-5 inline-flex items-center gap-1.5 font-heading text-sm font-semibold text-[#b61416] transition-colors group-hover:text-[#8f0f11]">
+                        {cta}
+                        <ArrowUpRight
+                          size={16}
+                          className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                        />
+                      </span>
+                    )}
+                  </CardTag>
+                </motion.div>
+              );
+            },
+          )}
         </div>
       </div>
     </section>

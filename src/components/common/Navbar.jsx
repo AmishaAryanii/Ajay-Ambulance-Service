@@ -15,12 +15,41 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
-const PHONE = "+919996453141";
+const PHONE = "+9192891994279";
+
+// Apna logo /public folder mein rakho aur path yahan badlo
+const LOGO = "/logo.png";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+
+  const trackCallConversion = (e) => {
+    e.preventDefault();
+
+    let called = false;
+
+    const makeCall = () => {
+      if (called) return;
+      called = true;
+      window.location.href = `tel:${PHONE}`;
+    };
+
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      const timeout = setTimeout(makeCall, 1000);
+
+      window.gtag("event", "conversion", {
+        send_to: "AW-18310636441/-XVHCOC9mdQcEJnHmJtE",
+        event_callback: () => {
+          clearTimeout(timeout);
+          makeCall();
+        },
+      });
+    } else {
+      makeCall();
+    }
+  };
 
   const { scrollYProgress } = useScroll();
   const progressWidth = useSpring(scrollYProgress, {
@@ -39,6 +68,9 @@ export default function Navbar() {
   // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "unset";
+    return () => {
+      document.body.style.overflow = "unset";
+    };
   }, [isOpen]);
 
   // Close mobile menu on route change
@@ -59,20 +91,21 @@ export default function Navbar() {
       />
 
       <nav className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
+        <div className="flex items-center justify-between h-20 md:h-24">
+          {/* Logo (bada) */}
           <Link href="/" className="flex items-center gap-2.5 group">
             <motion.div
-              whileHover={{ scale: 1.06, rotate: -3 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
               transition={{ duration: 0.25 }}
             >
               <Image
-                src="/logo.webp"
-                alt="UrgentCare Ambulance"
-                width={110}
-                height={46}
+                src={LOGO}
+                alt="Ajay Ambulance Service"
+                width={220}
+                height={90}
                 priority
+                className="h-14 w-auto sm:h-16 md:h-[4.5rem] object-contain"
               />
             </motion.div>
           </Link>
@@ -110,6 +143,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <a
               href={`tel:${PHONE}`}
+              onClick={trackCallConversion}
               className="hidden md:flex items-center gap-2 bg-[#b61416] text-white font-heading font-semibold text-sm px-5 py-2.5 rounded-full hover:bg-[#8f0f11] transition-colors shadow-sm hover:shadow-md hover:-translate-y-0.5 duration-200"
             >
               <Phone size={16} className="fill-white" strokeWidth={0} />
@@ -165,10 +199,11 @@ export default function Navbar() {
           >
             <div className="flex items-center justify-between h-20 px-5 border-b border-gray-100 flex-shrink-0">
               <Image
-                src="/logo.webp"
-                alt="UrgentCare Ambulance"
-                width={100}
-                height={42}
+                src={LOGO}
+                alt="Ajay Ambulance Service"
+                width={180}
+                height={72}
+                className="h-12 w-auto object-contain"
               />
               <button
                 onClick={() => setIsOpen(false)}
@@ -211,6 +246,7 @@ export default function Navbar() {
               })}
               <motion.a
                 href={`tel:${PHONE}`}
+                onClick={trackCallConversion}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navLinks.length * 0.06, duration: 0.3 }}

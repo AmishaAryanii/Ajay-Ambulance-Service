@@ -19,8 +19,9 @@ export default function ServicesPage() {
      <OurStory/>
      <MissionVision/>
      
-    <MeetOurTeam/>
+   
     <WhyTrustUs/>
+     <MeetOurTeam/>
     <CTASection/>
     </>
   );
