@@ -14,8 +14,8 @@ import {
   Ambulance,
 } from "lucide-react";
 
-const PHONE = "+9192891994279";
-const PHONE_DISPLAY = "+91 92891994279";
+const PHONE = "+919289194279";
+const PHONE_DISPLAY = "+91 9289194279";
 const EMAIL = "ay5451959@gmail.com";
 
 // Replace with your real office / base address

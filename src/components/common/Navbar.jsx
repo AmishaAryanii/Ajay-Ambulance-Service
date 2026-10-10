@@ -15,7 +15,7 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
-const PHONE = "+9192891994279";
+const PHONE = "+919289194279";
 
 // Apna logo /public folder mein rakho aur path yahan badlo
 const LOGO = "/logo.png";

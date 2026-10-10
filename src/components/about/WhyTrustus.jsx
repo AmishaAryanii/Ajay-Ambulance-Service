@@ -14,7 +14,7 @@ import {
 
 gsap.registerPlugin(ScrollTrigger);
 
-const PHONE = "+9192891994279";
+const PHONE = "+919289194279";
 
 const reasons = [
   {
@@ -159,7 +159,7 @@ export default function WhyTrustUs() {
             className="inline-flex items-center gap-2 rounded-full bg-[#f7f5f2] px-6 py-3 font-heading font-semibold text-[#b61416] shadow-xl shadow-black/20 transition hover:bg-white hover:-translate-y-0.5"
           >
             <Phone className="h-4 w-4" />
-            Call +91 92891994279
+            Call +91 9289194279
           </a>
         </div>
       </div>

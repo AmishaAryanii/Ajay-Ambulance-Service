@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ChevronRight, Phone, Mail, Clock, Siren } from "lucide-react";
 
-const PHONE = "+9192891994279";
-const PHONE_DISPLAY = "+91 92891994279";
+const PHONE = "+919289194279";
+const PHONE_DISPLAY = "+91 9289194279";
 const EMAIL = "ay5451959@gmail.com";
 
 // Replace with a real photo of your office/dispatch center once available.

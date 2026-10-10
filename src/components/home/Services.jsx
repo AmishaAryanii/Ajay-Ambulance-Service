@@ -13,7 +13,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 
-const PHONE = "+9192891994279";
+const PHONE = "+919289194279";
 
 // Images /public folder mein rakho. image: null karoge to grey box dikhega.
 const services = [

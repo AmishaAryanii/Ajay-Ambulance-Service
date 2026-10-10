@@ -8,7 +8,7 @@ import { Phone, CheckCircle2, Ambulance } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const PHONE = "+9192891994279";
+const PHONE = "+919289194279";
 
 const points = [
   "Single vehicle se shuru hua safar, aaj poora emergency network",
@@ -140,7 +140,7 @@ export default function OurStory() {
             className="story-item mt-8 inline-flex items-center gap-2 rounded-full bg-[#b61416] px-6 py-3 font-heading font-semibold text-white shadow-lg shadow-[#b61416]/30 transition hover:bg-[#9a1012]"
           >
             <Phone className="h-4 w-4" />
-            Call +91 92891994279
+            Call +91 9289194279
           </a>
         </div>
       </div>
