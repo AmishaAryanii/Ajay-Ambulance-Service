@@ -67,7 +67,7 @@ export default function OurStory() {
 
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-[#01203f] shadow-xl">
             <Image
-              src="/urgentcare5.png"
+              src="/image12.jpeg"
               alt="Ajay Ambulance Service vehicle on emergency response duty"
               fill
               sizes="(max-width: 1024px) 90vw, 500px"

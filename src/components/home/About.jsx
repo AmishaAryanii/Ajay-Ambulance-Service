@@ -19,7 +19,7 @@ const PHONE = "+919289194279";
 const PHONE_DISPLAY = "+91 9289194279";
 
 // Apni images /public folder mein rakho aur path yahan badlo
-const MAIN_IMAGE = "about.png";
+const MAIN_IMAGE = "/image5.jpeg";
 const SMALL_IMAGE = "/urgentcare6.jpeg";
 
 const stats = [

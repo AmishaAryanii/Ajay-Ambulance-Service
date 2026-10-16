@@ -102,27 +102,34 @@ export default function ContactFormSection() {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const validationErrors = validate();
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const validationErrors = validate();
 
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
+  if (Object.keys(validationErrors).length > 0) {
+    setErrors(validationErrors);
+    return;
+  }
 
-    // TODO: replace with your actual submission endpoint
-    // await fetch("/api/contact", { method: "POST", body: JSON.stringify(formData) });
+  // TODO: replace with your actual submission endpoint
+  // await fetch("/api/contact", { method: "POST", body: JSON.stringify(formData) });
 
-    setSubmitted(true);
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      service: services[0],
-      message: "",
+  // Google Ads conversion: fires only after validation passes
+  if (typeof window !== "undefined" && typeof window.gtag === "function") {
+    window.gtag("event", "conversion", {
+      send_to: "AW-18503279137/eMZHCObnwpwdEKHEhvdE",
     });
-  };
+  }
+
+  setSubmitted(true);
+  setFormData({
+    name: "",
+    email: "",
+    phone: "",
+    service: services[0],
+    message: "",
+  });
+};
 
   return (
     <section className="relative bg-gray-50">

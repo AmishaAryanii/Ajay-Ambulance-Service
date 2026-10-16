@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -10,23 +10,53 @@ import {
   CalendarClock,
   Play,
   X,
+  ChevronLeft,
+  ChevronRight,
   Image as ImageIcon,
   Video,
 } from "lucide-react";
 
 const categories = ["All", "Fleet", "Emergency Response", ];
 
+// Kitni items ek page par dikhani hain
+const ITEMS_PER_PAGE = 12;
+
 // 👉 ADD YOUR IMAGE LINKS HERE.
 // Put each photo in /public (e.g. /public/gallery/unit-04.jpg) and set `image: "/gallery/unit-04.jpg"`.
 // Leave `image: null` and it will fall back to the gradient + icon placeholder shown now.
+
 const photoItems = [
   { id: "p1", category: "Fleet", title: "ALS Ambulance – Unit 04", icon: Ambulance, gradient: "from-[#01203f] to-[#0a3866]", image: "/urgentcare1.png" },
-  { id: "p2", category: "Emergency Response", title: "On-Site Response, ", icon: HeartPulse, gradient: "from-[#b61416] to-[#7d0e10]", image: "/urgentcare2.png" },
-  { id: "p3", category: "fleet", title: "Paramedic Team Briefing", icon: Users, gradient: "from-[#01203f] to-[#3a4a63]", image: "/urgentcare4.png"},
-  { id: "p4", category: "Fleet", title: "BLS Ambulance – Unit 09", icon: Ambulance, gradient: "from-[#0a3866] to-[#01203f]", image: "/urgentcare5.png"},
-  { id: "p5", category: "Emergency Response", title: " Ambulance", icon: CalendarClock, gradient: "from-[#b61416] to-[#01203f]", image: "/img1.png" },
-  { id: "p6", category: "Emergency Response", title: " Ambulance", icon: HeartPulse, gradient: "from-[#7d0e10] to-[#b61416]", image: "/img2.png" },
+  { id: "p2", category: "Emergency Response", title: "On-Site Response", icon: HeartPulse, gradient: "from-[#b61416] to-[#7d0e10]", image: "/urgentcare2.png" },
+  { id: "p3", category: "Fleet", title: "Paramedic Team Briefing", icon: Users, gradient: "from-[#01203f] to-[#3a4a63]", image: "/urgentcare4.png" },
+  { id: "p4", category: "Fleet", title: "BLS Ambulance – Unit 09", icon: Ambulance, gradient: "from-[#0a3866] to-[#01203f]", image: "/urgentcare5.png" },
+  { id: "p5", category: "Emergency Response", title: "Emergency Ambulance", icon: CalendarClock, gradient: "from-[#b61416] to-[#01203f]", image: "/img1.png" },
+  { id: "p6", category: "Emergency Response", title: "Ambulance Response", icon: HeartPulse, gradient: "from-[#7d0e10] to-[#b61416]", image: "/img2.png" },
+
+  { id: "p7", category: "Emergency Response", title: "Emergency Response 3", icon: HeartPulse, gradient: "from-[#01203f] to-[#0a3866]", image: "/image1.jpeg" },
+  { id: "p8", category: "Emergency Response", title: "Emergency Response 4", icon: Ambulance, gradient: "from-[#b61416] to-[#7d0e10]", image: "/image2.jpeg" },
+  { id: "p9", category: "Emergency Response", title: "Emergency Response 5", icon: HeartPulse, gradient: "from-[#01203f] to-[#3a4a63]", image: "/image3.jpeg" },
+  { id: "p10", category: "Emergency Response", title: "Emergency Response 6", icon: Ambulance, gradient: "from-[#0a3866] to-[#01203f]", image: "/image4.jpeg" },
+  { id: "p11", category: "Emergency Response", title: "Emergency Response 7", icon: CalendarClock, gradient: "from-[#b61416] to-[#01203f]", image: "/image5.jpeg" },
+  { id: "p12", category: "Emergency Response", title: "Emergency Response 8", icon: HeartPulse, gradient: "from-[#7d0e10] to-[#b61416]", image: "/image6.jpeg" },
+  { id: "p13", category: "Emergency Response", title: "Emergency Response 9", icon: Ambulance, gradient: "from-[#01203f] to-[#0a3866]", image: "/image7.jpeg" },
+  { id: "p14", category: "Emergency Response", title: "Emergency Response 10", icon: HeartPulse, gradient: "from-[#b61416] to-[#7d0e10]", image: "/image8.jpeg" },
+  { id: "p15", category: "Emergency Response", title: "Emergency Response 11", icon: CalendarClock, gradient: "from-[#01203f] to-[#3a4a63]", image: "/image9.jpeg" },
+  { id: "p16", category: "Emergency Response", title: "Emergency Response 12", icon: Ambulance, gradient: "from-[#0a3866] to-[#01203f]", image: "/image10.jpeg" },
+  { id: "p17", category: "Emergency Response", title: "Emergency Response 13", icon: HeartPulse, gradient: "from-[#b61416] to-[#01203f]", image: "/image11.jpeg" },
+  { id: "p18", category: "Emergency Response", title: "Emergency Response 14", icon: Ambulance, gradient: "from-[#7d0e10] to-[#b61416]", image: "/image12.jpeg" },
+  { id: "p19", category: "Emergency Response", title: "Emergency Response 15", icon: HeartPulse, gradient: "from-[#01203f] to-[#0a3866]", image: "/image13.jpeg" },
+  { id: "p20", category: "Emergency Response", title: "Emergency Response 16", icon: CalendarClock, gradient: "from-[#b61416] to-[#7d0e10]", image: "/image14.jpeg" },
+  { id: "p21", category: "Emergency Response", title: "Emergency Response 17", icon: Ambulance, gradient: "from-[#01203f] to-[#3a4a63]", image: "/image15.jpeg" },
+  { id: "p22", category: "Emergency Response", title: "Emergency Response 18", icon: HeartPulse, gradient: "from-[#0a3866] to-[#01203f]", image: "/image16.jpeg" },
+  { id: "p23", category: "Emergency Response", title: "Emergency Response 19", icon: Ambulance, gradient: "from-[#b61416] to-[#01203f]", image: "/image17.jpeg" },
+  { id: "p24", category: "Emergency Response", title: "Emergency Response 20", icon: HeartPulse, gradient: "from-[#7d0e10] to-[#b61416]", image: "/image18.jpeg" },
+  { id: "p25", category: "Emergency Response", title: "Emergency Response 21", icon: CalendarClock, gradient: "from-[#01203f] to-[#0a3866]", image: "/image19.jpeg" },
+  { id: "p26", category: "Emergency Response", title: "Emergency Response 22", icon: Ambulance, gradient: "from-[#b61416] to-[#7d0e10]", image: "/image20.jpeg" },
+  { id: "p27", category: "Emergency Response", title: "Emergency Response 23", icon: HeartPulse, gradient: "from-[#01203f] to-[#3a4a63]", image: "/image21.jpeg" },
+  { id: "p28", category: "Emergency Response", title: "Emergency Response 24", icon: Ambulance, gradient: "from-[#0a3866] to-[#01203f]", image: "/image22.jpeg" },
 ];
+
 
 // 👉 For videos, `image` is the thumbnail/poster shown in the grid (the play button overlays on top of it).
 const videoItems = [
@@ -40,12 +70,36 @@ export default function GalleryGrid() {
   const [mediaType, setMediaType] = useState("photos");
   const [activeCategory, setActiveCategory] = useState("All");
   const [lightboxItem, setLightboxItem] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const gridTopRef = useRef(null);
 
   const items = mediaType === "photos" ? photoItems : videoItems;
   const filteredItems =
     activeCategory === "All"
       ? items
       : items.filter((item) => item.category === activeCategory);
+
+  // Pagination calculations
+  const totalPages = Math.max(1, Math.ceil(filteredItems.length / ITEMS_PER_PAGE));
+  const safePage = Math.min(currentPage, totalPages);
+  const startIndex = (safePage - 1) * ITEMS_PER_PAGE;
+  const paginatedItems = filteredItems.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+  const goToPage = (page) => {
+    if (page < 1 || page > totalPages || page === safePage) return;
+    setCurrentPage(page);
+    gridTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const handleMediaTypeChange = (type) => {
+    setMediaType(type);
+    setCurrentPage(1);
+  };
+
+  const handleCategoryChange = (cat) => {
+    setActiveCategory(cat);
+    setCurrentPage(1);
+  };
 
   return (
     <section className="bg-white py-16 md:py-24">
@@ -56,7 +110,7 @@ export default function GalleryGrid() {
             {["photos",].map((type) => (
               <button
                 key={type}
-                onClick={() => setMediaType(type)}
+                onClick={() => handleMediaTypeChange(type)}
                 className="relative px-6 py-2.5 font-heading font-semibold text-sm rounded-full transition-colors z-10"
               >
                 {mediaType === type && (
@@ -84,7 +138,7 @@ export default function GalleryGrid() {
           {categories.map((cat) => (
             <button
               key={cat}
-              onClick={() => setActiveCategory(cat)}
+              onClick={() => handleCategoryChange(cat)}
               className={`font-body text-sm font-medium px-5 py-2 rounded-full border transition-colors ${
                 activeCategory === cat
                   ? "bg-[#b61416] border-[#b61416] text-white"
@@ -96,13 +150,16 @@ export default function GalleryGrid() {
           ))}
         </div>
 
+        {/* Grid scroll anchor */}
+        <div ref={gridTopRef} className="scroll-mt-28" />
+
         {/* Grid */}
         <motion.div
           layout
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           <AnimatePresence mode="popLayout">
-            {filteredItems.map(({ id, title, icon: Icon, gradient, category, image }, i) => (
+            {paginatedItems.map(({ id, title, icon: Icon, gradient, category, image }, i) => (
               <motion.button
                 key={id}
                 layout
@@ -122,7 +179,7 @@ export default function GalleryGrid() {
                     src={image}
                     alt={title}
                     fill
-                    sizes="(max-width: 768px) 50vw, 33vw"
+                    sizes="(max-width: 768px) 50vw, 25vw"
                     className="object-cover"
                   />
                 )}
@@ -140,9 +197,9 @@ export default function GalleryGrid() {
                 </div>
 
                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent">
-                  <span className="font-body text-[11px] font-semibold text-white/70 uppercase tracking-wide">
+                  {/* <span className="font-body text-[11px] font-semibold text-white/70 uppercase tracking-wide">
                     {category}
-                  </span>
+                  </span> */}
                   <p className="font-heading font-bold text-white text-sm mt-0.5">
                     {title}
                   </p>
@@ -156,6 +213,54 @@ export default function GalleryGrid() {
           <p className="text-center font-body text-gray-500 mt-10">
             No items found in this category yet.
           </p>
+        )}
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <nav
+            aria-label="Gallery pagination"
+            className="flex flex-col items-center gap-3 mt-12"
+          >
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              <button
+                onClick={() => goToPage(safePage - 1)}
+                disabled={safePage === 1}
+                aria-label="Previous page"
+                className="flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 bg-white text-gray-600 transition-colors hover:border-[#b61416]/40 hover:text-[#b61416] disabled:opacity-40 disabled:pointer-events-none"
+              >
+                <ChevronLeft size={18} />
+              </button>
+
+              {Array.from({ length: totalPages }, (_, idx) => idx + 1).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => goToPage(page)}
+                  aria-label={`Page ${page}`}
+                  aria-current={safePage === page ? "page" : undefined}
+                  className={`font-body text-sm font-medium w-10 h-10 rounded-full border transition-colors ${
+                    safePage === page
+                      ? "bg-[#b61416] border-[#b61416] text-white"
+                      : "bg-white border-gray-200 text-gray-600 hover:border-[#b61416]/40 hover:text-[#b61416]"
+                  }`}
+                >
+                  {page}
+                </button>
+              ))}
+
+              <button
+                onClick={() => goToPage(safePage + 1)}
+                disabled={safePage === totalPages}
+                aria-label="Next page"
+                className="flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 bg-white text-gray-600 transition-colors hover:border-[#b61416]/40 hover:text-[#b61416] disabled:opacity-40 disabled:pointer-events-none"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
+
+            <p className="font-body text-xs text-gray-500">
+              Showing {startIndex + 1}–{Math.min(startIndex + ITEMS_PER_PAGE, filteredItems.length)} of {filteredItems.length}
+            </p>
+          </nav>
         )}
       </div>
 

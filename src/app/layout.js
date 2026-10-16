@@ -22,37 +22,34 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Saurabh Ambulance | 24/7 Emergency Ambulance Service in Delhi NCR",
+  title: "Ajay Ambulance | 24/7 Emergency Ambulance Service in Delhi NCR",
   description:
-    "Saurabh Ambulance provides 24/7 emergency and non-emergency ambulance services across Delhi NCR with fully equipped vehicles and trained paramedics.",
+    "Ajay Ambulance provides 24/7 emergency and non-emergency ambulance services across Delhi NCR with fully equipped vehicles and trained paramedics.",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${jakarta.variable} ${inter.variable}`}>
       <body className="font-body antialiased">
-        {/* Google Ads Library */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-18310636441"
-          strategy="afterInteractive"
-        />
+ 
+{/* Google Ads Global Site Tag */}
+<Script
+  src="https://www.googletagmanager.com/gtag/js?id=AW-18503279137"
+  strategy="afterInteractive"
+/>
 
-        {/* Google Ads Initialization */}
-        <Script id="google-ads" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
+<Script id="google-ads" strategy="afterInteractive">
+  {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){window.dataLayer.push(arguments);}
+    window.gtag = gtag;
 
-            function gtag(){
-              dataLayer.push(arguments);
-            }
+    gtag('js', new Date());
+    gtag('config', 'AW-18503279137');
+    gtag('config', 'AW-18310636441');
+  `}
+</Script>
 
-            window.gtag = gtag;
-
-            gtag('js', new Date());
-
-            gtag('config', 'AW-18310636441');
-          `}
-        </Script>
 
         <TopBar />
         <Navbar />

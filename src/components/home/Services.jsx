@@ -21,37 +21,37 @@ const services = [
     icon: HeartPulse,
     title: "ICU Life Support Ambulance",
     desc: "Fully equipped ICU ambulances with ventilator, cardiac monitor, oxygen support, infusion pumps and trained paramedics for critical patients.",
-    image: "/img2.png",
+    image: "/image7.jpeg",
   },
   {
     icon: Truck,
     title: "Normal Ambulance",
     desc: "Safe and comfortable ambulance service for routine hospital visits, patient discharge, dialysis and non-emergency transportation.",
-    image: "/urgentcare5.png",
+    image: "/image13.jpeg",
   },
   {
     icon: Building2,
     title: "Outstation Ambulance",
     desc: "24×7 long-distance ambulance service across Delhi NCR and major cities in India with experienced medical staff.",
-    image: "/urgentcare4.png",
+    image: "/image18.jpeg",
   },
   {
     icon: Users,
     title: "Patient Transfer Service",
     desc: "Professional inter-hospital transfers with continuous monitoring and medical assistance throughout the journey.",
-    image: "/urgentcare1.png",
+    image: "/image3.jpeg",
   },
   {
     icon: Cross,
     title: "Mortuary Van Service",
     desc: "Respectful and dignified mortuary van services for local and outstation transportation.",
-    image: "/img1.png",
+    image: "/image20.jpeg",
   },
   {
     icon: CalendarClock,
     title: "Event Medical Support",
     desc: "Ambulance and paramedic standby for weddings, sports events, corporate gatherings and public functions.",
-    image: "/urgentcare2.png",
+    image: "/image4.jpeg",
   },
 ];
 

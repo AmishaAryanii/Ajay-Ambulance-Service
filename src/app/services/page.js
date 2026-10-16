@@ -6,7 +6,7 @@ import HowItWorks from "@/components/services/HowItWorks";
 import FAQ from "@/components/services/FAQ";
 
 export const metadata = {
-  title: "Our Services |Saurabh Ambulance",
+  title: "Our Services |Ajay Ambulance",
   description:
     "Emergency response, ICU on wheels, patient transfer, event standby, home care pickup, and mortuary transport — 24/7 across Delhi NCR.",
 };

@@ -91,7 +91,7 @@ export default function WhyChooseUs() {
             {/* Main image */}
             <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-gray-200 shadow-xl">
               <Image
-                src={MAIN_IMAGE}
+                src="/image3.jpeg"
                 alt="Ajay Ambulance Service emergency ambulance"
                 fill
                 priority

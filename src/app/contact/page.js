@@ -4,9 +4,9 @@ import ContactForm from "@/components/contact/ContactForm";
 import FAQ from "@/components/contact/FAQ";
 
 export const metadata = {
-  title: "Contact Us | Saurabh Ambulance",
+  title: "Contact Us | Ajay Ambulance",
   description:
-    "Get in touch with Saurabh Ambulance for emergency bookings, scheduled patient transport, or general enquiries. Available 24/7 across Delhi NCR.",
+    "Get in touch with Ajay Ambulance for emergency bookings, scheduled patient transport, or general enquiries. Available 24/7 across Delhi NCR.",
 };
 
 export default function ContactPage() {
